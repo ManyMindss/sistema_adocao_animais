@@ -1,0 +1,94 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Status{
+  DISPONIVEL
+  EM_ANALISE
+  ADOTADO
+}
+
+model Ong{
+  id Int @id @default(autoincrement())@map("id_ong")
+  nome String @db.VarChar(100) @map("nome_da_ong")
+  localizacao String @db.VarChar(100)
+  email String? @db.VarChar(100)
+  animails Animal[]
+  telefones Telefone[]
+  situacoesAdocao SituacaoAdocao[]
+
+  @@map("ongs")
+  }
+
+model Animal{
+  id Int @id @default(autoincrement()) @map ("id_animal")
+  idOng Int @map("id_ong")
+  nome_animal String @db.VarChar(50) @map("nome_do_animal")
+  raca String? @db.VarChar(60) @map("Raça")
+  cor String? @db.VarChar(50) @map("Cor")
+  idade Int? @map("Idade")
+  temperamento String? @db.VarChar(100) @map ("Temperamento")
+  pelagem String? @db.VarChar(50) @map("Pelagem")
+  porte String? @db.VarChar(50) @map("Porte")
+  ong Ong @relation(fields: [idOng], references: [id])
+  situacoesAdocao SituacaoAdocao[]
+  @@map("animais")
+}
+
+
+model Adotante {
+  id Int @id @default(autoincrement()) @map("id_adotante")
+  nome_adotante String @db.VarChar(100) @map("Nome_do_adotante")
+  localizacao String @db.VarChar(100) @map("Localização")
+  email String @db.VarChar(100) @map("Email")
+  data_nascimento DateTime @map ("data_de_nascimento")
+  telefones Telefone[]
+  situacoesAdocao SituacaoAdocao[]
+  @@map("adotantes")
+}
+
+model Telefone {
+  id Int @id @default(autoincrement()) @map("id_telefone")
+  numero String @db.VarChar(20)
+  tipoTelefone String @default("CELULAR")@db.VarChar(20) @map("Tipo_telefone")
+
+  idOng Int? @map("id_ong")
+  idAdotante Int? @map("id_adotante")
+
+  ong Ong? @relation(fields: [idOng], references:[id])
+  adotante Adotante? @relation(fields: [idAdotante],references:[id])
+  @@map("telefone")
+}
+
+
+
+model SituacaoAdocao {
+  id Int @id @default(autoincrement()) @map("id_situacao")
+  status Status @default(DISPONIVEL) @map("status")
+  dataSituacao DateTime @default(now()) @map("data_situacao")
+  observacoes String ? @db.VarChar(200)
+
+  idAnimal Int @map("id_animal")
+  idAdotante Int @map("id_adotante")
+  idOng Int @map ("id_ong")
+
+  animal Animal @relation(fields:[idAnimal],references:[id])
+  adotante Adotante @relation(fields:[idAdotante],references:[id])
+  ong Ong @relation(fields:[idOng],references:[id])
+
+  @@map("situacao_adocaod")
+
+
+}
