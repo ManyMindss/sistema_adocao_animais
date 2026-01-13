@@ -1,0 +1,73 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Ong {
+  id          Int        @id @default(autoincrement())
+  nome        String     @db.VarChar(100)
+  localizacao String     @db.VarChar(100)
+  email       String?    @db.VarChar(100)
+  
+  // Relações
+  animals     Animal[]
+  telefones   Telefone[]
+}
+enum StatusAnimal {
+  DISPONIVEL       
+  ADOTADO         
+  EM_TRATAMENTO    
+  AGUARDANDO_VISITA
+}
+enum SexoAnimal {
+  MACHO
+  FEMEA
+}
+model Animal {
+  id           Int      @id @default(autoincrement())
+  idOng        Int
+  nome         String   @db.VarChar(50)
+  raca         String?  @db.VarChar(60)
+  sexo         SexoAnimal?
+  cor          String?  @db.VarChar(50)
+  idade        Int?
+  temperamento String?  @db.VarChar(50)
+  pelagem      String?  @db.VarChar(50)
+  porte        String?  @db.VarChar(30)
+  status       StatusAnimal @default(DISPONIVEL)
+  // Relações
+  ong          Ong      @relation(fields: [idOng], references: [id])
+  @@map("animais")
+}
+
+model Adotante {
+  id              Int         @id @default(autoincrement())
+  nome            String      @db.VarChar(100)
+  localizacao     String      @db.VarChar(100)
+  email           String?     @db.VarChar(100)
+  dataNascimento  DateTime
+  
+  // Relações
+  telefones       Telefone[]
+}
+
+model Telefone {
+  id           Int       @id @default(autoincrement())
+  numero       String    @db.VarChar(20)
+  tipoTelefone String    @default("CELULAR") @db.VarChar(20)
+  
+  // Chaves estrangeiras (ambas opcionais)
+  idOng        Int?
+  idAdotante   Int?
+  
+  // Relações
+  ong          Ong?      @relation(fields: [idOng], references: [id])
+  adotante     Adotante? @relation(fields: [idAdotante], references: [id])
+}
