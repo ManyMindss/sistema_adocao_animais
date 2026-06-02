@@ -19,6 +19,8 @@ model Ong {
   // Relações
   animals     Animal[]
   telefones   Telefone[]
+  usuarioId Int? @unique
+  usuario Usuario? @relation(fields:[usuarioId],references:[id])
 }
 enum StatusAnimal {
   DISPONIVEL       
@@ -56,6 +58,8 @@ model Adotante {
   
   // Relações
   telefones       Telefone[]
+  usuarioId Int? @unique
+  usuario Usuario? @relation(fields:[usuarioId],references:[id])
 }
 
 model Telefone {
@@ -70,4 +74,24 @@ model Telefone {
   // Relações
   ong          Ong?      @relation(fields: [idOng], references: [id])
   adotante     Adotante? @relation(fields: [idAdotante], references: [id])
+}
+
+enum Role{
+  INSTITUICAO
+  ADOTANTE
+}
+
+model Usuario {
+  id              Int         @id @default(autoincrement())
+  nome            String      @db.VarChar(100)
+  email           String  @unique    @db.VarChar(100)
+  senha           String     
+  role      Role     @default(ADOTANTE)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relações
+  ong Ong?
+  adotante Adotante?
+
 }
