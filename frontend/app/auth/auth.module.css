@@ -1,0 +1,88 @@
+.form {
+  display: grid;
+  gap: 1rem;
+  max-width: 420px;
+}
+
+.field {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.field label {
+  font-weight: 600;
+}
+
+.field input,
+.field select {
+  padding: 0.65rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font: inherit;
+}
+
+.button {
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 6px;
+  background: #171717;
+  color: #fff;
+  font: inherit;
+  cursor: pointer;
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.success {
+  padding: 1rem;
+  border: 1px solid #badbcc;
+  background: #d1e7dd;
+  color: #0f5132;
+  border-radius: 8px;
+}
+
+.error {
+  padding: 1rem;
+  border: 1px solid #f5c2c7;
+  background: #f8d7da;
+  color: #842029;
+  border-radius: 8px;
+}
+
+.footer {
+  margin-top: 1rem;
+  color: #666;
+}
+
+@media (prefers-color-scheme: dark) {
+  .field input,
+  .field select {
+    border-color: #444;
+    background: #111;
+    color: #ededed;
+  }
+
+  .button {
+    background: #ededed;
+    color: #171717;
+  }
+
+  .footer {
+    color: #aaa;
+  }
+
+  .success {
+    border-color: #0f5132;
+    background: #0b2e13;
+    color: #badbcc;
+  }
+
+  .error {
+    border-color: #842029;
+    background: #2c0b0e;
+    color: #f5c2c7;
+  }
+}

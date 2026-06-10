@@ -1,0 +1,47 @@
+.error {
+  padding: 1rem;
+  border: 1px solid #f5c2c7;
+  background: #f8d7da;
+  color: #842029;
+  border-radius: 8px;
+}
+
+.empty {
+  color: #666;
+}
+
+.list {
+  list-style: none;
+  display: grid;
+  gap: 1rem;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1.25rem;
+}
+
+.card h2 {
+  margin-bottom: 0.75rem;
+}
+
+.card p {
+  margin-bottom: 0.35rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .empty {
+    color: #aaa;
+  }
+
+  .card {
+    border-color: #333;
+  }
+
+  .error {
+    border-color: #842029;
+    background: #2c0b0e;
+    color: #f5c2c7;
+  }
+}
