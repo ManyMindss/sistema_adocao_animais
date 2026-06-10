@@ -1,0 +1,20 @@
+import { IsOptional,IsString,IsEmail,IsDateString } from "class-validator";
+
+export class UpdateAdotanteDto{
+    @IsOptional()
+    @IsString()
+    nome?: string;
+
+    @IsOptional()
+    @IsString()
+    localizacao?: string;
+
+    @IsOptional()
+    @IsEmail ({},{message:'Email invalido'})
+    email?: string;
+
+    @IsOptional()
+    @IsDateString()
+    dataNascimento?: string;
+    
+}
