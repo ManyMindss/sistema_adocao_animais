@@ -45,7 +45,9 @@ model Animal {
   porte        String?  @db.VarChar(30)
   status       StatusAnimal @default(DISPONIVEL)
   // Relações
+  favoritos Favorito[]
   ong          Ong      @relation(fields: [idOng], references: [id])
+  interesses Interesse[]
   @@map("animais")
 }
 
@@ -57,9 +59,11 @@ model Adotante {
   dataNascimento  DateTime
   
   // Relações
+  favoritos Favorito[]
   telefones       Telefone[]
   usuarioId Int? @unique
   usuario Usuario? @relation(fields:[usuarioId],references:[id])
+  interesses Interesse[]
 }
 
 model Telefone {
@@ -94,4 +98,30 @@ model Usuario {
   ong Ong?
   adotante Adotante?
 
+}
+
+model Favorito {
+  id         Int      @id @default(autoincrement())
+  adotanteId Int
+  animalId   Int
+  createdAt  DateTime @default(now())
+
+  adotante   Adotante @relation(fields: [adotanteId], references: [id], onDelete: Cascade)
+  animal     Animal   @relation(fields: [animalId], references: [id], onDelete: Cascade)
+
+  @@unique([adotanteId, animalId])
+}
+
+model Interesse{
+  id Int @id @default(autoincrement())
+  adotanteId Int 
+  animalId Int 
+  mensagem String?
+  createdAt DateTime @default(now())
+  lido Boolean @default(false)
+
+  adotante Adotante @relation(fields:[adotanteId],references: [id],onDelete: Cascade)
+  animal Animal @relation(fields: [animalId],references: [id],onDelete: Cascade)
+
+  @@unique([adotanteId,animalId])
 }
