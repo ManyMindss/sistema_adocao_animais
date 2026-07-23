@@ -1,6 +1,6 @@
 import {
-  Controller,Get,Post,Body,Patch,Param,Delete,UseGuards,ParseIntPipe,}
-   from '@nestjs/common';
+  Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, ParseIntPipe, Query,
+} from '@nestjs/common';
 import { AnimaisService } from './animais.service';
 import { CreateAnimalDto } from './dto/create-animal.dto';
 import { UpdateAnimalDto } from './dto/update-animal.dto';
@@ -25,6 +25,23 @@ export class AnimaisController {
     return this.animaisService.findAll();
   }
 
+  @Get('disponiveis')
+  findAllDisponiveis(
+    @Query('page') page?: string,
+    @Query('limit') limit?: string,
+    @Query('porte')porte?: string,
+    @Query('idade')idade?:  string,
+    @Query('localizacao')localizacao?:string , 
+  ) {
+    return this.animaisService.findAllDisponiveis(
+      page ? parseInt(page) : 1,
+      limit ? parseInt(limit) : 10,
+      porte , 
+      idade? parseInt(idade): undefined,
+      localizacao, 
+    );
+  }
+
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.animaisService.findOne(id);
@@ -46,4 +63,4 @@ export class AnimaisController {
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.animaisService.remove(id);
   }
-}
+}7

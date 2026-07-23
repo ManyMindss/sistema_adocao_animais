@@ -6,6 +6,8 @@ import { OngModule } from '../ong/ong.module';
 import { AdotanteModule } from '../adotante/adotante.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { FavoritosModule } from '../favoritos/favoritos.module';
+import { InteressesModule } from '../interesses/interesses.module';
 
 @Module({
   imports: [
@@ -14,6 +16,8 @@ import { AppService } from './app.service';
     AnimaisModule,
     OngModule,
     AdotanteModule,
+    FavoritosModule,
+    InteressesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
