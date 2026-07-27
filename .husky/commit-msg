@@ -1,0 +1,2 @@
+#!/bin/sh
+node scripts/commitlint-msg.js "$1"
