@@ -1,0 +1,21 @@
+name: Branch Name Check
+
+on:
+  push:
+
+jobs:
+  branch-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Validar nome da branch
+        run: |
+          BRANCH_NAME=${GITHUB_REF#refs/heads/}
+
+          echo "Branch: $BRANCH_NAME"
+
+          if [[ ! $BRANCH_NAME =~ ^(feat|fix|hotfix|docs)\/[a-z0-9]+(-[a-z0-9]+)*$ ]]; then
+            echo "❌ Nome de branch inválido!"
+            echo "Use: tipo/descricao-em-kebab-case"
+            exit 1
+          fi
