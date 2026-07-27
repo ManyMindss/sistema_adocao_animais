@@ -9,6 +9,7 @@ fi
 if ! echo "$BRANCH_NAME" | grep -Eq '^(feat|fix|hotfix|docs)/[a-z0-9]+(-[a-z0-9]+)*$'; then
   echo "❌ Nome de branch inválido!"
   echo "👉 Use: tipo/descricao-em-kebab-case"
+  echo "👉 Tipos permitidos: feat, fix, hotfix, docs"
   echo "👉 Exemplo: feat/notifica-interesse"
   exit 1
 fi
