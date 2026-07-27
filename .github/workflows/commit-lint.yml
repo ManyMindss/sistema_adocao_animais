@@ -8,11 +8,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Instalar dependências
         run: npm install
 
       - name: Validar commits
         run: npx commitlint --from=HEAD~1 --to=HEAD
-        
