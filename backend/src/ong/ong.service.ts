@@ -7,7 +7,7 @@ import { UpdateOngDto } from './dto/update-ong.dto';
 export class OngService {
   constructor(private prisma: PrismaService) {}
 
-  async create(createOngDto: CreateOngDto, usuarioId: number) {
+  async create(createOngDto: CreateOngDto, usuarioId: string) {
     return this.prisma.ong.create({
       data: {
         ...createOngDto,
@@ -22,7 +22,7 @@ export class OngService {
     });
   }
 
-  async findOne(id: number) {
+  async findOne(id: string) {
     const ong = await this.prisma.ong.findUnique({
       where: { id },
       include: { animals: true, telefones: true },
@@ -35,7 +35,7 @@ export class OngService {
     return ong;
   }
 
-  async update(id: number, updateOngDto: UpdateOngDto) {
+  async update(id: string, updateOngDto: UpdateOngDto) {
     await this.findOne(id);
 
     return this.prisma.ong.update({
@@ -44,7 +44,7 @@ export class OngService {
     });
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     await this.findOne(id);
 
     return this.prisma.ong.delete({

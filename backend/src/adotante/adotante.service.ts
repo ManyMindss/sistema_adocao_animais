@@ -6,7 +6,7 @@ import { UpdateAdotanteDto } from './dto/update-adotante.dto';
 export class AdotanteService {
   constructor(private prisma: PrismaService) {}
 
-  async create(createAdotanteDto: CreateAdotanteDto, usuarioId: number) {
+  async create(createAdotanteDto: CreateAdotanteDto, usuarioId: string) {
     return this.prisma.adotante.create({
       data: {
         ...createAdotanteDto,
@@ -22,7 +22,7 @@ export class AdotanteService {
     });
   }
 
-  async findOne(id: number) {
+  async findOne(id: string) {
     const adotante = await this.prisma.adotante.findUnique({
       where: { id },
       include: { telefones: true },
@@ -35,7 +35,7 @@ export class AdotanteService {
     return adotante;
   }
 
-  async update(id: number, updateAdotanteDto: UpdateAdotanteDto) {
+  async update(id: string, updateAdotanteDto: UpdateAdotanteDto) {
     await this.findOne(id);
 
     const data: any = { ...updateAdotanteDto };
@@ -49,7 +49,7 @@ export class AdotanteService {
     });
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     await this.findOne(id);
 
     return this.prisma.adotante.delete({
