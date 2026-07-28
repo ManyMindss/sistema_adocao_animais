@@ -25,7 +25,7 @@ export class InteressesController {
   @Roles(Role.ADOTANTE)
   demonstrarInteresse(
     @Request() req,
-    @Param('animalId', ParseIntPipe) animalId: number,
+    @Param('animalId', ParseIntPipe) animalId: string,
     @Body('mensagem') mensagem?: string,
   ) {
     return this.interessesService.demonstrarInteresse(req.user.id, animalId, mensagem);
@@ -53,7 +53,7 @@ export class InteressesController {
   @Roles(Role.ADOTANTE)
   removerInteresse(
     @Request() req,
-    @Param('animalId', ParseIntPipe) animalId: number,
+    @Param('animalId', ParseIntPipe) animalId: string,
   ) {
     return this.interessesService.removerInteresse(req.user.id, animalId);
   }

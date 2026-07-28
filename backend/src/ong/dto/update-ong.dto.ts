@@ -8,9 +8,4 @@ export class UpdateOngDto{
     @IsOptional()
     @IsString()
     localizacao?:string;
-
-    @IsOptional()
-    @IsEmail({},{message:'Email invalido'})
-    email?:string;
-
 }

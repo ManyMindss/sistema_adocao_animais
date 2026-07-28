@@ -5,7 +5,7 @@ import { PrismaService } from "src/prisma/prisma.service";
 export class FavoritosService {
     constructor(private prisma :PrismaService) {}
 
-    async adicionar (adotanteId: number,animalId:number){
+    async adicionar (adotanteId: string,animalId:string){
 
 
         const animal =await this.prisma.animal.findUnique ({
@@ -30,7 +30,7 @@ export class FavoritosService {
         });
     }
 
-    async listar (adotanteId :number){
+    async listar (adotanteId :string){
         return this.prisma.favorito.findMany({
             where :{adotanteId},
             include : {
@@ -42,7 +42,7 @@ export class FavoritosService {
         });
     }
 
-    async remover (adotanteId :number,animalId: number){
+    async remover (adotanteId :string,animalId: string){
         const favorito = await this.prisma.favorito.findUnique({
             where :{
                 adotanteId_animalId :{adotanteId,animalId},

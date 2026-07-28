@@ -35,7 +35,7 @@ export class OngController {
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number) {
+  findOne(@Param('id', ParseIntPipe) id: string) {
     return this.ongService.findOne(id);
   }
 
@@ -43,7 +43,7 @@ export class OngController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.INSTITUICAO)
   update(
-    @Param('id', ParseIntPipe) id: number,
+    @Param('id', ParseIntPipe) id: string,
     @Body() updateOngDto: UpdateOngDto,
   ) {
     return this.ongService.update(id, updateOngDto);
@@ -52,7 +52,7 @@ export class OngController {
   @Delete(':id')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.INSTITUICAO)
-  remove(@Param('id', ParseIntPipe) id: number) {
+  remove(@Param('id', ParseIntPipe) id: string) {
     return this.ongService.remove(id);
   }
 }

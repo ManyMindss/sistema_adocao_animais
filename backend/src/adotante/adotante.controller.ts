@@ -26,7 +26,7 @@ export class AdotanteController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.ADOTANTE)
   create(@Body() createAdotanteDto: CreateAdotanteDto, @Request() req) {
-    return this.adotanteService.create(createAdotanteDto, req.user.id);
+    return this.adotanteService.create(createAdotanteDto, req.user.id || createAdotanteDto.id);
   }
 
   @Get()
@@ -35,7 +35,7 @@ export class AdotanteController {
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number) {
+  findOne(@Param('id', ParseIntPipe) id: string) {
     return this.adotanteService.findOne(id);
   }
 
@@ -43,7 +43,7 @@ export class AdotanteController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.ADOTANTE)
   update(
-    @Param('id', ParseIntPipe) id: number,
+    @Param('id', ParseIntPipe) id: string,
     @Body() updateAdotanteDto: UpdateAdotanteDto,
   ) {
     return this.adotanteService.update(id, updateAdotanteDto);
@@ -52,7 +52,7 @@ export class AdotanteController {
   @Delete(':id')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.ADOTANTE)
-  remove(@Param('id', ParseIntPipe) id: number) {
+  remove(@Param('id', ParseIntPipe) id: string) {
     return this.adotanteService.remove(id);
   }
 }

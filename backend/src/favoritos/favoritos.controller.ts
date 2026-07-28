@@ -23,7 +23,7 @@ export class FavoritosController {
   @Post(':animalId')
   adicionar(
     @Request() req,
-    @Param('animalId', ParseIntPipe) animalId: number,
+    @Param('animalId', ParseIntPipe) animalId: string,
   ) {
     return this.favoritosService.adicionar(req.user.id, animalId);
   }
@@ -36,7 +36,7 @@ export class FavoritosController {
   @Delete(':animalId')
   remover(
     @Request() req,
-    @Param('animalId', ParseIntPipe) animalId: number,
+    @Param('animalId', ParseIntPipe) animalId: string,
   ) {
     return this.favoritosService.remover(req.user.id, animalId);
   }
