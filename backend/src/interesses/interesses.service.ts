@@ -5,7 +5,7 @@ import { PrismaService } from '../prisma/prisma.service';
 export class InteressesService {
   constructor(private prisma: PrismaService) {}
 
-  async demonstrarInteresse(adotanteId: number, animalId: number, mensagem?: string) {
+  async demonstrarInteresse(adotanteId: string, animalId: string, mensagem?: string) {
     // Verificar se o animal existe e está disponível
     const animal = await this.prisma.animal.findUnique({
       where: { id: animalId },
@@ -40,7 +40,7 @@ export class InteressesService {
     });
   }
 
-  async listarMeusInteresses(adotanteId: number) {
+  async listarMeusInteresses(adotanteId: string) {
     return this.prisma.interesse.findMany({
       where: { adotanteId },
       include: {
@@ -52,7 +52,7 @@ export class InteressesService {
     });
   }
 
- async listarInteressesPorOng(usuarioId: number) {
+ async listarInteressesPorOng(usuarioId: string) {
   // Buscar a ONG pelo usuarioId
   const ong = await this.prisma.ong.findUnique({
     where: { usuarioId },
@@ -74,7 +74,7 @@ export class InteressesService {
   });
 }
 
-  async removerInteresse(adotanteId: number, animalId: number) {
+  async removerInteresse(adotanteId: string, animalId: string) {  
     const interesse = await this.prisma.interesse.findUnique({
       where: {
         adotanteId_animalId: { adotanteId, animalId },

@@ -4,7 +4,7 @@ import { IsNotEmpty,IsString,IsOptional,IsNumber, IsEnum } from "class-validator
 export class CreateAnimalDto{ 
   @IsNotEmpty  ({message : 'O ID da ONG é obrigatório'})
   @IsNumber()
-  idOng:number;
+  idOng:string;
 
   @IsNotEmpty({message: 'O nome do animal é obrigatorio'})
   @IsString()

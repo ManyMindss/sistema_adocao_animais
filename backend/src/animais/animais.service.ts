@@ -20,7 +20,7 @@ export class AnimaisService {
     });
   }
 
-  async findOne(id: number) {
+  async findOne(id: string) {
     const animal = await this.prisma.animal.findUnique({
       where: { id },
       include: { ong: true },
@@ -33,7 +33,7 @@ export class AnimaisService {
     return animal;
   }
 
-  async update(id: number, updateAnimalDto: UpdateAnimalDto) {
+  async update(id: string, updateAnimalDto: UpdateAnimalDto) {
     await this.findOne(id);
 
     return this.prisma.animal.update({
@@ -42,7 +42,7 @@ export class AnimaisService {
     });
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     await this.findOne(id);
 
     return this.prisma.animal.delete({
