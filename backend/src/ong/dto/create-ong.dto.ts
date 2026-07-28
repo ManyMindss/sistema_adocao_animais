@@ -8,8 +8,4 @@ export class CreateOngDto{
     @IsNotEmpty({message:'A localizaçãoo é obrigatoria'})
     @IsString()
     localizacao: string;
-
-    @IsNotEmpty()
-    @IsEmail({},{message:'Email invalido'})
-    email?: string;
 }

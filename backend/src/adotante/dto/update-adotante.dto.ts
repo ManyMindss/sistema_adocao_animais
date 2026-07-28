@@ -10,11 +10,6 @@ export class UpdateAdotanteDto{
     localizacao?: string;
 
     @IsOptional()
-    @IsEmail ({},{message:'Email invalido'})
-    email?: string;
-
-    @IsOptional()
     @IsDateString()
     dataNascimento?: string;
-    
 }

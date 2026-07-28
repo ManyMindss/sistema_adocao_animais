@@ -26,7 +26,7 @@ export class AdotanteController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.ADOTANTE)
   create(@Body() createAdotanteDto: CreateAdotanteDto, @Request() req) {
-    return this.adotanteService.create(createAdotanteDto, req.user.id);
+    return this.adotanteService.create(createAdotanteDto, req.user.id || createAdotanteDto.id);
   }
 
   @Get()

@@ -13,7 +13,6 @@ model Ong {
   id          String     @id @default(uuid())
   nome        String     @db.VarChar(100)
   localizacao String     @db.VarChar(100)
-  email       String?    @db.VarChar(100)
   
   // Relações
   animals     Animal[]
@@ -54,7 +53,6 @@ model Adotante {
   id              String      @id @default(uuid())
   nome            String      @db.VarChar(100)
   localizacao     String      @db.VarChar(100)
-  email           String?     @db.VarChar(100)
   dataNascimento  DateTime
   
   // Relações
